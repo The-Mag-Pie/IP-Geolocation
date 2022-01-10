@@ -7,9 +7,9 @@
         xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="IP_Geolocation.MainWindow"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
-        Title="IP Geolocation" Height="674" Width="1079" KeyDown="Window_KeyDown">
+        Title="IP Geolocation" Height="674" Width="1079" KeyDown="Window_KeyDown" ResizeMode="CanMinimize">
     <Grid x:Name="mainGrid">
-        <Wpf:WebView2 x:Name="webView" HorizontalAlignment="Left" VerticalAlignment="Center" Width="708" Height="658"/>
+        <Wpf:WebView2 x:Name="webView" HorizontalAlignment="Left" VerticalAlignment="Center" Width="708" Height="638"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="737,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontSize="16" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" KeyUp="textBox_KeyUp"/>
         <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" Margin="994,47,0,0" VerticalAlignment="Top" FontSize="16" BorderThickness="1,1,1,1" Click="searchButton_Click"/>
         <TextBlock x:Name="dataTextBlock" HorizontalAlignment="Left" Margin="790,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>

@@ -34,7 +34,7 @@ namespace IP_Geolocation
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter && textBox.Text != DefaultTextBoxContent && textBox.Text.Length > 0)
-                searchButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                searchButton.PerformClick();
         }
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
