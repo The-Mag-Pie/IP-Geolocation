@@ -34,12 +34,6 @@ namespace IP_Geolocation
         {
             string json = GET(query);
 
-            System.Windows.MessageBox.Show(json
-                .Replace("{", "{\n    ")
-                .Replace("}", "\n}")
-                .Replace(",", ",\n    ")
-                );
-
             return JsonConvert.DeserializeObject<GeoApiObject>(json);
         }
     }

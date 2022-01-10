@@ -31,6 +31,12 @@ namespace IP_Geolocation
             searchButton.IsEnabled = false;
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && textBox.Text != DefaultTextBoxContent && textBox.Text.Length > 0)
+                searchButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        }
+
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (textBox.Text == DefaultTextBoxContent)
@@ -58,11 +64,40 @@ namespace IP_Geolocation
 
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
+            mainGrid.Cursor = Cursors.Wait;
+
             GeoApiObject obj = GeoApi.GetObject(textBox.Text);
-            webView.Source = new Uri(GMapsUrl
+
+            string output;
+            if (obj.status == "fail")
+            {
+                output = $"QUERY FAILED: {obj.query}";
+                output += $"\nMessage: {obj.message}";
+            }
+            else if (obj.status == "success")
+            {
+                webView.Source = new Uri(GMapsUrl
                 .Replace("{lat}", obj.lat.ToString().Replace(',', '.'))
                 .Replace("{lon}", obj.lon.ToString().Replace(',', '.'))
                 );
+                output = $"QUERY SUCCESS: {obj.query}";
+                output += $"\nContinent: {obj.continent}";
+                output += $"\nCountry: {obj.country}";
+                output += $"\nRegion: {obj.regionName}";
+                output += $"\nCity: {obj.city}";
+                output += $"\nDistrict: {obj.district}";
+                output += $"\nZip code: {obj.zip}";
+                output += $"\nISP: {obj.isp}";
+                output += $"\nOrganisation: {obj.org}";
+                output += $"\nAS Name: {obj.asname}";
+                output += $"\nMobile network: {(obj.mobile ? "Yes" : "No")}";
+                output += $"\nProxy: {(obj.proxy ? "Yes" : "No")}";
+                output += $"\nHosting: {(obj.hosting ? "Yes" : "No")}";
+            }
+            else output = "NO DATA";
+            textBlock.Text = output;
+
+            mainGrid.Cursor = null;
         }
     }
 }
